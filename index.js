@@ -1,7 +1,24 @@
-import chalk from "chalk";
-import boxen from "boxen";
+#!/usr/bin/env node
 
-export const info = {
+"use strict";
+
+import boxen from "boxen";
+import chalk from "chalk";
+import inquirer from "inquirer";
+import clear from "clear";
+import open from "open";
+import fs from "fs";
+import ora from "ora";
+import cliSpinners from "cli-spinners";
+import request from "request";
+import path from "path";
+
+clear();
+
+const prompt = inquirer.createPromptModule();
+
+// Define your info object here
+const info = {
   name: "Praveen Kumar",
   phone: "+91-9798951680",
   email: "praveenkumar21uics@gmail.com",
@@ -51,22 +68,6 @@ export const info = {
         "A private chat app with real-time notifications and customizable profiles.",
     },
   ],
-  roles: [
-    {
-      role: "Technical Content Writer",
-      organization: "HackTechHub",
-      duration: "July 2022 – Aug 2023",
-      details:
-        "Authored technical documents on Data Structures, Algorithms, and Web Development.",
-    },
-    {
-      role: "Web Development Lead",
-      organization: "Google Developer Students Club, IIIT Agartala",
-      duration: "July 2022 – July 2023",
-      details:
-        "Mentored 200+ students, boosting project completion rates by 40%.",
-    },
-  ],
   achievements: [
     "Solved 450+ Leetcode questions.",
     "CodeChef 4-Star coder with a max rating of 1864.",
@@ -74,52 +75,85 @@ export const info = {
   ],
 };
 
-// Format your output with chalk and boxen
-const output = `
-${chalk.bold.green("Praveen Kumar")}
-${chalk.gray("+91-9798951680")} | ${chalk.blue(
-  "praveenkumar21uics@gmail.com"
-)} | ${chalk.magenta("github: sha0urya")} | ${chalk.cyan("linkedin: sha0urya")}
+const questions = [
+  {
+    type: "list",
+    name: "action",
+    message: "What would you like to do?",
+    choices: [
+      {
+        name: `Send me an ${chalk.green.bold("email")}?`,
+        value: () => {
+          open(`mailto:${info.email}`);
+          console.log("\nDone, see you soon at inbox.\n");
+        },
+      },
+      {
+        name: `Download my ${chalk.magentaBright.bold("Resume")}?`,
+        value: () => {
+          const loader = ora({
+            text: "Downloading Resume...",
+            spinner: cliSpinners.material,
+          }).start();
 
-${chalk.bold("Education:")}
-${info.education}
+          let pipe = request(
+            "https://drive.google.com/uc?export=download&id=1og65lNZs0dv8-gej4ZfHDV4Pz23pfEmQ"
+          ).pipe(fs.createWriteStream("./praveen-resume.pdf"));
 
-${chalk.bold("Experience:")}
-${info.experience
-  .map(
-    (exp) =>
-      `${chalk.bold(exp.role)} at ${exp.company} (${exp.duration}, ${
-        exp.location || ""
-      })\n${exp.details.join("\n")}\n`
-  )
-  .join("\n")}
+          pipe.on("finish", function () {
+            let downloadPath = path.join(process.cwd(), "praveen-resume.pdf");
+            console.log(`\nResume Downloaded at ${downloadPath}\n`);
+            open(downloadPath);
+            loader.stop();
+          });
+        },
+      },
+      {
+        name: `Schedule a ${chalk.redBright.bold("Meeting")}?`,
+        value: () => {
+          open("https://calendly.com/singhsatyam312005/30min");
+          console.log("\n See you at the meeting \n");
+        },
+      },
+      {
+        name: "Just quit.",
+        value: () => {
+          console.log("Hasta la vista.\n");
+        },
+      },
+    ],
+  },
+];
 
-${chalk.bold("Projects:")}
-${info.projects
-  .map(
-    (proj) => `${chalk.bold(proj.name)} (${proj.tech})\n${proj.description}\n`
-  )
-  .join("\n")}
+// Display the box with information
+const data = {
+  name: chalk.bold.green("             Praveen Kumar"),
+  phone: chalk.gray("+91-9798951680"),
+  email: chalk.blue("praveenkumar21uics@gmail.com"),
+  github: chalk.magenta("github: sha0urya"),
+  linkedin: chalk.cyan("linkedin: sha0urya"),
+};
 
-${chalk.bold("Roles and Responsibilities:")}
-${info.roles
-  .map(
-    (role) =>
-      `${chalk.bold(role.role)} at ${role.organization} (${role.duration})\n${
-        role.details
-      }\n`
-  )
-  .join("\n")}
-
-${chalk.bold("Achievements:")}
-${info.achievements.join("\n")}
-`;
-
-console.log(
-  boxen(output, {
-    padding: 1,
+const me = boxen(
+  [
+    `${data.name}`,
+    ``,
+    `${chalk.white.bold("Phone:")} ${data.phone}`,
+    `${chalk.white.bold("Email:")} ${data.email}`,
+    `${chalk.white.bold("GitHub:")} ${data.github}`,
+    `${chalk.white.bold("LinkedIn:")} ${data.linkedin}`,
+    ``,
+    `${chalk.italic("I am currently looking for new opportunities.")}`,
+    `${chalk.italic("Feel free to reach out via email or LinkedIn.")}`,
+  ].join("\n"),
+  {
     margin: 1,
-    borderStyle: "round",
+    padding: 1,
+    borderStyle: "single",
     borderColor: "green",
-  })
+  }
 );
+
+console.log(me);
+
+prompt(questions).then((answer) => answer.action());
