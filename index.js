@@ -17,7 +17,6 @@ clear();
 
 const prompt = inquirer.createPromptModule();
 
-// Define your info object here
 const info = {
   name: "Praveen Kumar",
   phone: "+91-9798951680",
@@ -25,7 +24,7 @@ const info = {
   github: "sha0urya",
   linkedin: "sha0urya",
   education:
-    "Bachelor of Technology in Computer Science - IIIT Agartala (2021-2025), CGPA: 7.64",
+    "Bachelor of Technology in Computer Science - IIIT Agartala (2021-2025)",
   experience: [
     {
       company: "Online Jaoo",
@@ -116,6 +115,35 @@ const questions = [
         },
       },
       {
+        name: `Want to know ${chalk.yellowBright.bold("more")} about me?`,
+        value: () => {
+          const moreInfo = boxen(
+            [
+              `${chalk.bold.green("More Info About Praveen Kumar")}`,
+              ``,
+              `${chalk.white.bold("Education:")} ${info.education}`,
+              `${chalk.white.bold("Experience:")} `,
+              `- ${info.experience[0].role} at ${info.experience[0].company} (${info.experience[0].duration})`,
+              `  ${info.experience[0].details.join("\n  ")}`,
+              `- ${info.experience[1].role} at ${info.experience[1].company} (${info.experience[1].duration})`,
+              `  ${info.experience[1].details.join("\n  ")}`,
+              ``,
+              `${chalk.white.bold("Projects:")}`,
+              `- ${info.projects[0].name} (${info.projects[0].tech}) - ${info.projects[0].description}`,
+              `- ${info.projects[1].name} (${info.projects[1].tech}) - ${info.projects[1].description}`,
+              `- ${info.projects[2].name} (${info.projects[2].tech}) - ${info.projects[2].description}`,
+            ].join("\n"),
+            {
+              margin: 1,
+              padding: 1,
+              borderStyle: "single",
+              borderColor: "yellow",
+            }
+          );
+          console.log(moreInfo);
+        },
+      },
+      {
         name: "Just quit.",
         value: () => {
           console.log("Hasta la vista.\n");
@@ -125,7 +153,6 @@ const questions = [
   },
 ];
 
-// Display the box with information
 const data = {
   name: chalk.bold.green("             Praveen Kumar"),
   phone: chalk.gray("+91-9798951680"),
@@ -145,6 +172,10 @@ const me = boxen(
     ``,
     `${chalk.italic("I am currently looking for new opportunities.")}`,
     `${chalk.italic("Feel free to reach out via email or LinkedIn.")}`,
+    ``,
+    `${chalk.bold.yellowBright(
+      "⚡ Fun fact: Next.js has more routes than my weekend plans (and trust me, that’s saying something)! 😎"
+    )}`,
   ].join("\n"),
   {
     margin: 1,
