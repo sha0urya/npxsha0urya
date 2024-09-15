@@ -1,9 +1,12 @@
 {
   "name": "sha0urya",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An npm package to showcase Praveen Kumar's skills.",
   "main": "index.js",
   "type": "module",
+  "bin": {
+    "sha0urya": "./index.js"
+  },
   "scripts": {
     "test": "npm run test"
   },
