@@ -154,11 +154,11 @@ const questions = [
 ];
 
 const data = {
-  name: chalk.bold.green("                          Praveen Kumar"),
-  phone: chalk.gray("             +91-9798951680"),
-  email: chalk.blue("             praveenkumar21uics@gmail.com"),
-  github: chalk.magenta("             Username: sha0urya"),
-  linkedin: chalk.cyan("             Username: sha0urya"),
+  name: chalk.bold.green("Praveen Kumar"),
+  phone: chalk.gray("+91-9798951680"),
+  email: chalk.blue("praveenkumar21uics@gmail.com"),
+  github: chalk.magenta("sha0urya"),
+  linkedin: chalk.cyan("sha0urya"),
 };
 
 const me = boxen(
@@ -167,8 +167,8 @@ const me = boxen(
     ``,
     `${chalk.white.bold("Phone:")} ${data.phone}`,
     `${chalk.white.bold("Email:")} ${data.email}`,
-    `${chalk.white.bold("GitHub:")} ${data.github}`,
-    `${chalk.white.bold("LinkedIn:")} ${data.linkedin}`,
+    `${chalk.white.bold("GitHub Username:")} ${data.github}`,
+    `${chalk.white.bold("LinkedIn Username:")} ${data.linkedin}`,
     ``,
     `${chalk.italic("I am currently looking for new opportunities.")}`,
     `${chalk.italic("Feel free to reach out via email or LinkedIn.")}`,
