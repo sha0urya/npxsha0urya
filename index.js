@@ -174,7 +174,7 @@ const me = boxen(
     `${chalk.italic("Feel free to reach out via email or LinkedIn.")}`,
     ``,
     `${chalk.bold.yellowBright(
-      "🗣️: Terminal is the ultimate game of trust. One wrong move, and it’s “oops, there goes your system.”🧨💥"
+      "🗣️: The terminal is the ultimate game of trust. One wrong move, and it’s ‘Oops, there goes your system.’”🧨💥"
     )}`,
   ].join("\n"),
   {
