@@ -154,11 +154,11 @@ const questions = [
 ];
 
 const data = {
-  name: chalk.bold.green("             Praveen Kumar"),
-  phone: chalk.gray("+91-9798951680"),
-  email: chalk.blue("praveenkumar21uics@gmail.com"),
-  github: chalk.magenta("github: sha0urya"),
-  linkedin: chalk.cyan("linkedin: sha0urya"),
+  name: chalk.bold.green("                          Praveen Kumar"),
+  phone: chalk.gray("             +91-9798951680"),
+  email: chalk.blue("             praveenkumar21uics@gmail.com"),
+  github: chalk.magenta("             Username: sha0urya"),
+  linkedin: chalk.cyan("             Username: sha0urya"),
 };
 
 const me = boxen(
@@ -174,7 +174,7 @@ const me = boxen(
     `${chalk.italic("Feel free to reach out via email or LinkedIn.")}`,
     ``,
     `${chalk.bold.yellowBright(
-      "⚡ Fun fact: Next.js has more routes than my weekend plans (and trust me, that’s saying something)! 😎"
+      "🗣️: Terminal is the ultimate game of trust. One wrong move, and it’s “oops, there goes your system.”🧨💥"
     )}`,
   ].join("\n"),
   {
