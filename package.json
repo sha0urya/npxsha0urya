@@ -1,6 +1,6 @@
 {
   "name": "sha0urya",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "An npm package to showcase Praveen Kumar's skills.",
   "main": "index.js",
   "type": "module",
