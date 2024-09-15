@@ -1,0 +1,27 @@
+{
+  "name": "sha0urya",
+  "version": "1.0.0",
+  "description": "An npm package to showcase Praveen Kumar's skills.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sha0urya/npxsha0urya.git"
+  },
+  "keywords": [
+    "npm"
+  ],
+  "author": "Praveen Kumar",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sha0urya/npxsha0urya/issues"
+  },
+  "homepage": "https://github.com/sha0urya/npxsha0urya#readme",
+  "dependencies": {
+    "boxen": "^8.0.1",
+    "chalk": "^5.3.0"
+  }
+}
