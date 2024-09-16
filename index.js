@@ -17,11 +17,11 @@ import path from "path";
 clear();
 
 // Spinner for loader
-const spinner = ora({ text: "Loading", spinner: cliSpinners.material });
-spinner.start();
+// const spinner = ora({ text: "Loading", spinner: cliSpinners.material });
+// spinner.start();
 
 const welcomeMessage = `
-@@@@@@@@   @@@@@@@    @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@@  @@@  @@@  
+@@@@@@@@  @@@@@@@    @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@@  @@@  @@@  
 @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@ @@@  
 @@!  @@@  @@!  @@@  @@!  @@@  @@!  @@@  @@!       @@!       @@!@!@@@  
 !@!  @!@  !@!  @!@  !@!  @!@  !@!  @!@  !@!       !@!       !@!!@!@!  
@@ -335,5 +335,5 @@ inquirer
     console.error("Error:", error);
   })
   .finally(() => {
-    spinner.stop();
+    // spinner.stop();
   });
