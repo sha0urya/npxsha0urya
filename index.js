@@ -20,23 +20,29 @@ clear();
 const spinner = ora({ text: "Loading", spinner: cliSpinners.material });
 spinner.start();
 
-// Welcome message
 const welcomeMessage = `
-   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-   │                                                                                                              │
-   │   Praveen Kumar                                                                                              │
-   │                                                                                                              │
-   │   Phone: +91-9798951680                                                                                      │
-   │   Email: praveenkumar21uics@gmail.com                                                                        │
-   │   GitHub Username: sha0urya                                                                                  │
-   │   LinkedIn Username: sha0urya                                                                                │
-   │                                                                                                              │
-   │   I am currently looking for new opportunities.                                                              │
-   │   Feel free to reach out via email or LinkedIn.                                                              │
-   │                                                                                                              │
-   │   🗣️: Terminal is the ultimate game of trust. One wrong move, and it’s “oops, there goes your system.”🧨💥   │
-   │                                                                                                              │
-   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+@@@@@@@@   @@@@@@@    @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@@  @@@  @@@  
+@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@ @@@  
+@@!  @@@  @@!  @@@  @@!  @@@  @@!  @@@  @@!       @@!       @@!@!@@@  
+!@!  @!@  !@!  @!@  !@!  @!@  !@!  @!@  !@!       !@!       !@!!@!@!  
+@!@@!@!   @!@!!@!   @!@!@!@!  @!@  !@!  @!!!:!    @!!!:!    @!@ !!@!  
+!!@!!!    !!@!@!    !!!@!!!!  !@!  !!!  !!!!!:    !!!!!:    !@!  !!!  
+!!:       !!: :!!   !!:  !!!  :!:  !!:  !!:       !!:       !!:  !!!  
+:!:       :!:  !:!  :!:  !:!   ::!!:!   :!:       :!:       :!:  !:!  
+: :       ::   :::  ::   :::   ::::     :: ::::   :: ::::   : :  : :  
+:         :    : :  :     :      :      : :: ::   : :: ::    :    :   
+───────────────────────────────────────────────────────────────────────
+Praveen Kumar
+
+Phone: +91-9798951680
+Email: praveenkumar21uics@gmail.com
+GitHub Username: sha0urya
+LinkedIn Username: sha0urya
+
+I am currently looking for new opportunities.
+Feel free to reach out via email or LinkedIn.
+
+🗣️: Terminal is the ultimate game of trust. One wrong move, and it’s “oops, there goes your system.”🧨💥
 `;
 
 console.log(
@@ -48,7 +54,6 @@ console.log(
   })
 );
 
-// Data sections
 const eduBg = [
   {
     title: "B.Tech in Computer Science Engineering",
@@ -201,7 +206,6 @@ const socials = [
   { id: 7, title: "Instagram", url: "https://instagram.com/sha0urya", tab: 9 },
 ];
 
-// Inquirer questions
 const questions = [
   {
     type: "list",
@@ -322,7 +326,6 @@ const questions = [
   },
 ];
 
-// Ask the questions
 inquirer
   .prompt(questions)
   .then((answer) => {
