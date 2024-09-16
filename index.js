@@ -22,16 +22,21 @@ spinner.start();
 
 // Welcome message
 const welcomeMessage = `
-@@@@@@@   @@@@@@@    @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@@  @@@  @@@  
-@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@ @@@  
-@@!  @@@  @@!  @@@  @@!  @@@  @@!  @@@  @@!       @@!       @@!@!@@@  
-!@!  @!@  !@!  @!@  !@!  @!@  !@!  @!@  !@!       !@!       !@!!@!@!  
-@!@@!@!   @!@!!@!   @!@!@!@!  @!@  !@!  @!!!:!    @!!!:!    @!@ !!@!  
-!!@!!!    !!@!@!    !!!@!!!!  !@!  !!!  !!!!!:    !!!!!:    !@!  !!!  
-!!:       !!: :!!   !!:  !!!  :!:  !!:  !!:       !!:       !!:  !!!  
-:!:       :!:  !:!  :!:  !:!   ::!!:!   :!:       :!:       :!:  !:!  
-: :       ::   :::  ::   :::   ::::     :: ::::   :: ::::   : :  : :  
-:         :    : :  :     :      :      : :: ::   : :: ::    :    :  
+   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+   │                                                                                                              │
+   │   Praveen Kumar                                                                                              │
+   │                                                                                                              │
+   │   Phone: +91-9798951680                                                                                      │
+   │   Email: praveenkumar21uics@gmail.com                                                                        │
+   │   GitHub Username: sha0urya                                                                                  │
+   │   LinkedIn Username: sha0urya                                                                                │
+   │                                                                                                              │
+   │   I am currently looking for new opportunities.                                                              │
+   │   Feel free to reach out via email or LinkedIn.                                                              │
+   │                                                                                                              │
+   │   🗣️: Terminal is the ultimate game of trust. One wrong move, and it’s “oops, there goes your system.”🧨💥   │
+   │                                                                                                              │
+   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 `;
 
 console.log(
@@ -43,9 +48,7 @@ console.log(
   })
 );
 
-// Data sections (added as per your request)
-
-// Education section
+// Data sections
 const eduBg = [
   {
     title: "B.Tech in Computer Science Engineering",
@@ -61,7 +64,6 @@ const eduBg = [
   },
 ];
 
-// Achievements section
 const achievementsData = [
   "Solved 450+ Leetcode questions, achieved max 1968 rating and 7 badges.",
   "CodeChef 4-Star with maximum rating-1864.",
@@ -71,7 +73,6 @@ const achievementsData = [
   "Secured 481st place in Reply Code Challenge 2022.",
 ];
 
-// Experience section
 const experience = [
   {
     company: "Buyeazzy",
@@ -96,7 +97,6 @@ const experience = [
   },
 ];
 
-// Positions section
 const positionsData = [
   {
     role: "Web Development Lead",
@@ -112,7 +112,6 @@ const positionsData = [
   },
 ];
 
-// Projects section
 const projects = [
   {
     id: 1,
@@ -126,15 +125,8 @@ const projects = [
     desc: "Developed and deployed a responsive blog application",
     url: "https://one-last-option.onrender.com/",
   },
-  {
-    id: 3,
-    title: "Praveen Newsletter",
-    desc: "My personal newsletter",
-    url: "",
-  },
 ];
 
-// Skills section
 const skillsData = [
   {
     category: "Languages",
@@ -179,7 +171,6 @@ const skillsData = [
   },
 ];
 
-// Socials section
 const socials = [
   { id: 1, title: "GitHub", url: "https://github.com/sha0urya", tab: 12 },
   {
@@ -210,12 +201,12 @@ const socials = [
   { id: 7, title: "Instagram", url: "https://instagram.com/sha0urya", tab: 9 },
 ];
 
-// Questions for the user to select sections
+// Inquirer questions
 const questions = [
   {
     type: "list",
     name: "action",
-    message: "What would you like to see?",
+    message: "What would you like to do?",
     choices: [
       {
         name: "Education",
@@ -290,19 +281,56 @@ const questions = [
         },
       },
       {
-        name: "Quit",
+        name: "Send me an email?",
         value: () => {
-          console.log("Goodbye!\n");
+          open(`mailto:praveenkumar21uics@gmail.com`);
+        },
+      },
+      {
+        name: "Download my Resume?",
+        value: () => {
+          const loader = ora({
+            text: "Downloading Resume...",
+            spinner: cliSpinners.material,
+          }).start();
+          let pipe = request(
+            "https://drive.google.com/uc?export=download&id=1og65lNZs0dv8-gej4ZfHDV4Pz23pfEmQ"
+          ).pipe(fs.createWriteStream("./praveen-resume.pdf"));
+          pipe.on("finish", function () {
+            let downloadPath = path.join(process.cwd(), "praveen-resume.pdf");
+            console.log(`\nResume Downloaded at ${downloadPath}\n`);
+            open(downloadPath);
+            loader.stop();
+          });
+        },
+      },
+      {
+        name: "Schedule a Meeting?",
+        value: () => {
+          open("https://calendly.com/singhsatyam312005/30min");
+          console.log("\nLet's talk soon!\n");
+        },
+      },
+      {
+        name: "Exit",
+        value: () => {
+          console.log("Goodbye!");
+          process.exit();
         },
       },
     ],
   },
 ];
 
-// Stop the spinner after loading
-setTimeout(() => {
-  spinner.stop();
-
-  // Main prompt
-  inquirer.prompt(questions).then((answer) => answer.action());
-}, 1000);
+// Ask the questions
+inquirer
+  .prompt(questions)
+  .then((answer) => {
+    answer.action();
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  })
+  .finally(() => {
+    spinner.stop();
+  });
