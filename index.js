@@ -13,43 +13,42 @@ import cliSpinners from "cli-spinners";
 import request from "request";
 import path from "path";
 
-// Clear the console
 clear();
 
-// Spinner for loader
-// const spinner = ora({ text: "Loading", spinner: cliSpinners.material });
-// spinner.start();
-
 const welcomeMessage = `
-@@@@@@@@  @@@@@@@    @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@@  @@@  @@@  
-@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@ @@@  
-@@!  @@@  @@!  @@@  @@!  @@@  @@!  @@@  @@!       @@!       @@!@!@@@  
-!@!  @!@  !@!  @!@  !@!  @!@  !@!  @!@  !@!       !@!       !@!!@!@!  
-@!@@!@!   @!@!!@!   @!@!@!@!  @!@  !@!  @!!!:!    @!!!:!    @!@ !!@!  
-!!@!!!    !!@!@!    !!!@!!!!  !@!  !!!  !!!!!:    !!!!!:    !@!  !!!  
-!!:       !!: :!!   !!:  !!!  :!:  !!:  !!:       !!:       !!:  !!!  
-:!:       :!:  !:!  :!:  !:!   ::!!:!   :!:       :!:       :!:  !:!  
-: :       ::   :::  ::   :::   ::::     :: ::::   :: ::::   : :  : :  
-:         :    : :  :     :      :      : :: ::   : :: ::    :    :   
-───────────────────────────────────────────────────────────────────────
-Praveen Kumar
+@@@@@@@@  @@@@@@@    @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@@  @@@   @@@  
+@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@  @@@  
+@@!  @@@  @@!  @@@  @@!  @@@  @@!  @@@  @@!       @@!       @@!@! @@@  
+!@!  @!@  !@!  @!@  !@!  @!@  !@!  @!@  !@!       !@!       !@!!@ !@!  
+@!@@!@!   @!@!!@!   @!@!@!@!  @!@  !@!  @!!!:!    @!!!:!    @!@ @!!@!  
+!!@!!!    !!@!@!    !!!@!!!!  !@!  !!!  !!!!!:    !!!!!:    !@!  @!!!  
+!!:       !!: :!!   !!:  !!!  :!:  !!:  !!:       !!:       !!:   !!!  
+:!:       :!:  !:!  :!:  !:!   ::!!:!   :!:       :!:       :!:   !:!  
+: :       ::   :::  ::   :::   ::::     :: ::::   :: ::::   : :   : :  
+:         :    : :  :     :      :      : :: ::   : :: ::    :     :   
+   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+   │                                                                                                              │
+   │   Praveen Kumar                                                                                              │
+   │                                                                                                              │
+   │   Phone: +91-9798951680                                                                                      │
+   │   Email: praveenkumar21uics@gmail.com                                                                        │
+   │   GitHub Username: sha0urya                                                                                  │
+   │   LinkedIn Username: sha0urya                                                                                │
+   │                                                                                                              │
+   │   I am currently looking for new opportunities.                                                              │
+   │   Feel free to reach out via email or LinkedIn.                                                              │
+   │                                                                                                              │
+   │   🗣️: Terminal is the ultimate game of trust. One wrong move, and it’s “oops, there goes your system.”💥    │
+   │                                                                                                              │
+   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-Phone: +91-9798951680
-Email: praveenkumar21uics@gmail.com
-GitHub Username: sha0urya
-LinkedIn Username: sha0urya
-
-I am currently looking for new opportunities.
-Feel free to reach out via email or LinkedIn.
-
-🗣️: Terminal is the ultimate game of trust. One wrong move, and it’s “oops, there goes your system.”🧨💥
 `;
 
 console.log(
   boxen(welcomeMessage, {
     padding: 1,
     margin: 1,
-    borderStyle: "double",
+    borderStyle: "single",
     borderColor: "green",
   })
 );
@@ -279,46 +278,15 @@ const questions = [
         value: () => {
           socials.forEach((social) =>
             console.log(
-              `${chalk.bold(social.title)}: ${chalk.blue(social.url)}\n`
+              `${chalk.bold(social.title)}: ${chalk.blue(social.url)}`
             )
           );
         },
       },
       {
-        name: "Send me an email?",
-        value: () => {
-          open(`mailto:praveenkumar21uics@gmail.com`);
-        },
-      },
-      {
-        name: "Download my Resume?",
-        value: () => {
-          const loader = ora({
-            text: "Downloading Resume...",
-            spinner: cliSpinners.material,
-          }).start();
-          let pipe = request(
-            "https://drive.google.com/uc?export=download&id=1og65lNZs0dv8-gej4ZfHDV4Pz23pfEmQ"
-          ).pipe(fs.createWriteStream("./praveen-resume.pdf"));
-          pipe.on("finish", function () {
-            let downloadPath = path.join(process.cwd(), "praveen-resume.pdf");
-            console.log(`\nResume Downloaded at ${downloadPath}\n`);
-            open(downloadPath);
-            loader.stop();
-          });
-        },
-      },
-      {
-        name: "Schedule a Meeting?",
-        value: () => {
-          open("https://calendly.com/singhsatyam312005/30min");
-          console.log("\nLet's talk soon!\n");
-        },
-      },
-      {
         name: "Exit",
         value: () => {
-          console.log("Goodbye!");
+          console.log("Thank you for visiting! Goodbye!");
           process.exit();
         },
       },
@@ -326,14 +294,24 @@ const questions = [
   },
 ];
 
-inquirer
-  .prompt(questions)
-  .then((answer) => {
-    answer.action();
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-  })
-  .finally(() => {
-    // spinner.stop();
+async function mainMenu() {
+  const answer = await inquirer.prompt(questions);
+  answer.action();
+  promptContinue();
+}
+
+async function promptContinue() {
+  const continueAnswer = await inquirer.prompt({
+    type: "confirm",
+    name: "continue",
+    message: "Would you like to return to the main menu?",
   });
+  if (continueAnswer.continue) {
+    mainMenu();
+  } else {
+    console.log("Thank you! Exiting...");
+    process.exit();
+  }
+}
+
+mainMenu();
